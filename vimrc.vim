@@ -41,6 +41,11 @@ set expandtab
 "fold settings
 autocmd Filetype c setlocal foldmethod=syntax
 autocmd Filetype h setlocal foldmethod=syntax
+augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave * mkview
+    autocmd BufWinEnter * silent! loadview
+augroup END
 
 " markdown
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
