@@ -74,7 +74,8 @@ set noswapfile
 set nobackup
 set noundofile
 set path+=**
-noremap <leader>v :tabe ~/Documents/Vim/motion_commands.txt<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e C:/sw_tools/Vim/vimfiles/plugin<CR><C-w><C-r><C-w><C-w>
+"noremap <leader>v :tabe ~/Documents/Vim/motion_commands.txt<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e C:/sw_tools/Vim/vimfiles/plugin<CR><C-w><C-r><C-w><C-w>
+execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e" . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
 nnoremap <leader>w :up<CR>
 inoremap <leader>w <Esc>:up<CR>
 nnoremap <leader>Q :bd!<CR>
