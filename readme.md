@@ -4,7 +4,7 @@
 - Numbers
 - Search options
 - Basic remap:
-    * jj
+>   * jj
     * CTRL+ hjkl
     * CTRL+ nm
     * no arrows
@@ -15,7 +15,7 @@
 - Markdown remaps
 - Color settings
 - Custom settings
-    * no backup
+>   * no backup
     * path +=\*\*
     * wildmenu
     * maps:
