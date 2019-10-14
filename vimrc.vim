@@ -1,3 +1,7 @@
+"Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
 "Numbers
 set nu
 set relativenumber
@@ -14,6 +18,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
+nnoremap <C-n> gT
+nnoremap <C-m> gt
 nnoremap c "cc
 nnoremap C "cC
 noremap <Up> <Nop>
@@ -28,7 +34,7 @@ cnoremap <C-h> <Left>
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 highlight NonText guifg=#1a1a19
 highlight SpecialKey guifg=#4a4a59
-exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:\u95,eol:¬"
+exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:\u95,eol:Â¬"
 set list
 nmap <leader>l :set list!<CR>
 nnoremap <leader>s :set spell!<CR>
@@ -57,7 +63,8 @@ autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
 autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
 autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kAletype markdown,rmd setlocal foldmethod=syntax
+autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
+autocmd Filetype markdown,rmd setlocal foldmethod=syntax
 
 "Color settings
 
@@ -75,13 +82,11 @@ set nobackup
 set noundofile
 set path+=**
 "noremap <leader>v :tabe ~/Documents/Vim/motion_commands.txt<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e C:/sw_tools/Vim/vimfiles/plugin<CR><C-w><C-r><C-w><C-w>
-execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e" . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
+execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e " . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
 nnoremap <leader>w :up<CR>
 inoremap <leader>w <Esc>:up<CR>
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>q :b#<bar>bd#<CR>
-nnoremap <leader>n gT
-nnoremap <leader>m gt
 inoremap <Space><Space> <Esc>/<++><CR>"_c4l
 nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
