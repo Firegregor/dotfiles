@@ -3,10 +3,17 @@
 - Encoding
 - Numbers
 - Search options
+- Basic settings:
+    * ruler
+    * mouse
+    * autoindent
+    * no additional files
+    * path+=\*\*
 - Basic remap:
->   * jj
+    * jj
     * CTRL+ hjkl
     * CTRL+ nm
+    * change to dedicated register
     * no arrows
     * comand CTRL+ lh
 - Non printable characters
@@ -14,15 +21,12 @@
 - Fold settings
 - Markdown remaps
 - Color settings
+- commenting code for c and python
 - Custom settings
->   * no backup
-    * path +=\*\*
-    * wildmenu
-    * maps:
-        - <leader>w
-        - <leader>q
-        - <leader>t
-        - <Space><Space>
+    * <leader>w
+    * <leader>q
+    * <leader>t
+    * <Space><Space>
 
 # Log
 ## 14.10.2019

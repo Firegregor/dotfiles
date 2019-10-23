@@ -5,12 +5,21 @@ set fileencoding=utf-8
 "Numbers
 set nu
 set relativenumber
-set autoindent
 
 "search options
 set hlsearch
 set incsearch
 syntax on
+
+" Basic settings
+set ruler
+set mouse=""
+set wildmenu
+set autoindent
+set noswapfile
+set nobackup
+set noundofile
+set path+=**
 
 "Basic remap
 inoremap jj <Esc>
@@ -34,7 +43,7 @@ cnoremap <C-h> <Left>
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 highlight NonText guifg=#1a1a19
 highlight SpecialKey guifg=#4a4a59
-exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:\u95,eol:¬"
+exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:•,eol:¬"
 set list
 nmap <leader>l :set list!<CR>
 nnoremap <leader>s :set spell!<CR>
@@ -67,26 +76,28 @@ autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd setlocal foldmethod=syntax
 
 "Color settings
-
 colo darkblue
 set cursorline "Highlight current line
 hi CursorLine term=bold cterm=bold guibg=Grey20
 hi Folded ctermbg=240
 
+"comenting code
+au BufWinEnter *.py noremap <leader>p :s/^/# /<CR> :nohlsearch <CR>
+au BufWinEnter *.pyw noremap <leader>p :s/^/# /<CR> :nohlsearch <CR>
+au BufWinEnter *.py noremap <leader>P :s/^# //<CR> :nohlsearch <CR>
+au BufWinEnter *.pyw noremap <leader>P :s/^# //<CR> :nohlsearch <CR>
+au BufWinEnter *.c noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
+au BufWinEnter *.h noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
+au BufWinEnter *.c noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
+au BufWinEnter *.h noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
+
 "Custom settings
-set ru
-set mouse=""
-set wildmenu
-set noswapfile
-set nobackup
-set noundofile
-set path+=**
-"noremap <leader>v :tabe ~/Documents/Vim/motion_commands.txt<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e C:/sw_tools/Vim/vimfiles/plugin<CR><C-w><C-r><C-w><C-w>
 execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e " . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
 nnoremap <leader>w :up<CR>
 inoremap <leader>w <Esc>:up<CR>
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>q :b#<bar>bd#<CR>
-inoremap <Space><Space> <Esc>/<++><CR>"_c4l
+inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch <CR>"_c4l
 nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
+
