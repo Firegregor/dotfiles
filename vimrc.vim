@@ -10,6 +10,7 @@ set relativenumber
 set hlsearch
 set incsearch
 syntax on
+nnoremap <leader>h :nohlsearch<CR>
 
 " Basic settings
 set ruler
@@ -62,6 +63,13 @@ augroup remember_folds
     autocmd BufWinEnter * silent! loadview
 augroup END
 
+" Vimscript file settings ------------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
 " markdown
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
@@ -100,4 +108,3 @@ nnoremap <leader>q :b#<bar>bd#<CR>
 inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch <CR>"_c4l
 nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
-
