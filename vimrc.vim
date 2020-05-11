@@ -1,3 +1,5 @@
+
+
 "Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -55,6 +57,7 @@ set shiftwidth=4
 set expandtab
 
 "fold settings
+set foldmethod=manual
 autocmd Filetype c setlocal foldmethod=syntax
 autocmd Filetype h setlocal foldmethod=syntax
 augroup remember_folds
@@ -63,14 +66,7 @@ augroup remember_folds
     autocmd BufWinEnter * silent! loadview
 augroup END
 
-" Vimscript file settings ------------------------- {{{
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-" }}}
-
-" markdown
+"" markdown
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
 autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
@@ -81,7 +77,7 @@ autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
 autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd setlocal foldmethod=syntax
+"" autocmd Filetype markdown,rmd setlocal foldmethod=syntax
 
 "Color settings
 colo darkblue
@@ -108,3 +104,6 @@ nnoremap <leader>q :b#<bar>bd#<CR>
 inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch <CR>"_c4l
 nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
+nnoremap <leader>f :diffoff<CR>:diffthis<CR>
+nnoremap <leader>F :diffoff<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>

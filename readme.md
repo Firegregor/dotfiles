@@ -29,6 +29,10 @@
     * <Space><Space>
 
 # Log
+## 08.05.2020
+- added plugin Pathoogen
+- added plugin NerdTree
+
 ## 14.10.2019
 - added encoding = utf-8
 - fixed md ,3
