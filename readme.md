@@ -29,6 +29,9 @@
     * <Space><Space>
 
 # Log
+## 01.06.2020
+- Coppy/Paste as <leader>y/p
+
 ## 08.05.2020
 - added plugin Pathoogen
 - added plugin NerdTree

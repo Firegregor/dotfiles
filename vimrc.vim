@@ -107,3 +107,5 @@ nnoremap <leader>b :<C-r>p<CR>
 nnoremap <leader>f :diffoff<CR>:diffthis<CR>
 nnoremap <leader>F :diffoff<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
