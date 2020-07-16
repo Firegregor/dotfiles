@@ -46,7 +46,7 @@ cnoremap <C-h> <Left>
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 highlight NonText guifg=#1a1a19
 highlight SpecialKey guifg=#4a4a59
-exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:•,eol:¬"
+exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:\uB7,eol:\uAC"
 set list
 nmap <leader>l :set list!<CR>
 nnoremap <leader>s :set spell!<CR>
