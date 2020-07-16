@@ -1,5 +1,3 @@
-
-
 "Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -11,17 +9,19 @@ set relativenumber
 "search options
 set hlsearch
 set incsearch
-syntax on
 nnoremap <leader>h :nohlsearch<CR>
 
 " Basic settings
+syntax on
 set ruler
+set noerrorbells
 set mouse=""
 set wildmenu
-set autoindent
+set smartindent
 set noswapfile
 set nobackup
-set noundofile
+set undodir=~/.vim/undodir
+set undofile
 set path+=**
 
 "Basic remap
@@ -67,17 +67,41 @@ augroup remember_folds
 augroup END
 
 "" markdown
-autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
-"" autocmd Filetype markdown,rmd setlocal foldmethod=syntax
+function MarkdownLevel()
+    if getline(v:lnum) =~ '^# .*$'
+        return ">1"
+    endif
+    if getline(v:lnum) =~ '^## .*$'
+        return ">2"
+    endif
+    if getline(v:lnum) =~ '^### .*$'
+        return ">3"
+    endif
+    if getline(v:lnum) =~ '^#### .*$'
+        return ">4"
+    endif
+    if getline(v:lnum) =~ '^##### .*$'
+        return ">5"
+    endif
+    if getline(v:lnum) =~ '^###### .*$'
+        return ">6"
+    endif
+    return "=" 
+endfunction
+
+autocmd Filetype md,markdown,rmd inoremap ,n ---<Enter><Enter>
+autocmd Filetype md,markdown,rmd inoremap ,b ****<++><Esc>F*hi
+autocmd Filetype md,markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
+autocmd Filetype md,markdown,rmd inoremap ,e **<++><Esc>F*i
+autocmd Filetype md,markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
+autocmd Filetype md,markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+autocmd Filetype md,markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+autocmd Filetype md,markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
+autocmd Filetype markdown,rmd setlocal foldexpr=MarkdownLevel
+autocmd Filetype markdown,rmd setlocal foldmethod=expr
+""
 
 "Color settings
 colo darkblue
