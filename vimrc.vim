@@ -46,7 +46,7 @@ cnoremap <C-h> <Left>
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 highlight NonText guifg=#1a1a19
 highlight SpecialKey guifg=#4a4a59
-exec "set listchars=tab:\u86\uBB,nbsp:\uB7,trail:\uB7,eol:\uAC"
+exec "set listchars=tab:\uBB\uBB,nbsp:\uB7,trail:\uB7,eol:\uAC"
 set list
 nmap <leader>l :set list!<CR>
 nnoremap <leader>s :set spell!<CR>
@@ -120,7 +120,7 @@ au BufWinEnter *.c noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
 au BufWinEnter *.h noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
 
 "Custom settings
-execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e " . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
+silent execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e " . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
 nnoremap <leader>w :up<CR>
 inoremap <leader>w <Esc>:up<CR>
 nnoremap <leader>Q :bd!<CR>
@@ -133,3 +133,7 @@ nnoremap <leader>F :diffoff<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>

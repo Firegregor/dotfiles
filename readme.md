@@ -29,6 +29,10 @@
     * <Space><Space>
 
 # Log
+## 07.09.2020
+- adjust non printable characters for linux user
+- added quick resize
+
 ## 01.06.2020
 - Coppy/Paste as <leader>y/p
 
