@@ -1,5 +1,6 @@
 
 # Types of configuration
+## Vim
 - Encoding
 - Numbers
 - Search options
@@ -27,8 +28,18 @@
     * <leader>q
     * <leader>t
     * <Space><Space>
+## tmux
+- basic maping
+## bash
+- custom comand prompt
+- add function for adding to path
+- add to path ~/.vim/dotfiles/.bin
 
 # Log
+## 16.09.2020
+- added submodules for nerdtree and surround-vimm
+- to use neeed to add symlinks for bundle and autoload [tutorial](https://www.freecodecamp.org/news/symlink-tutorial-in-linux-how-to-create-and-remove-a-symbolic-link/)
+
 ## 07.09.2020
 - adjust non printable characters for linux user
 - added quick resize
