@@ -33,7 +33,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-n> gT
-nnoremap <C-m> gt
+nnoremap <C-p> gt
 nnoremap c "cc
 nnoremap C "cC
 noremap <Up> <Nop>
