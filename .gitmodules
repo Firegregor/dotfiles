@@ -7,3 +7,9 @@
 [submodule "tmux-plugins/tmux-resurrect"]
 	path = tmux-plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "bundle/robotframework-vim"]
+	path = bundle/robotframework-vim
+	url = https://github.com/mfukar/robotframework-vim.git
