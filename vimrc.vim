@@ -43,8 +43,8 @@ noremap <Right> <Nop>
 map! <F3> <C-R>=strftime('%c')<CR>
 cnoremap <C-l> <Right>
 cnoremap <C-h> <Left>
-nnoremap <leader>w :up<CR>
-inoremap <leader>w <Esc>:up<CR>
+nnoremap <leader>w :s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
+inoremap <leader>w <Esc>:s/[ ]\+$//e<CR>:nohlsearch<CR>up<CR>
 
 "non printable characters
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -94,18 +94,19 @@ function MarkdownLevel()
 endfunction
 
 autocmd Filetype md,markdown,rmd nnoremap ,n ---<Enter><Enter>
-autocmd Filetype md,markdown,rmd nnoremap ,b ****<++><Esc>F*hi
 autocmd Filetype md,markdown,rmd nnoremap ,s ~~~~<++><Esc>F~hi
-autocmd Filetype md,markdown,rmd nnoremap ,e **<++><Esc>F*i
 autocmd Filetype md,markdown,rmd nnoremap ,h ====<Space><++><Esc>F=hi
-autocmd Filetype md,markdown,rmd nnoremap ,i ![](<++>)<++><Esc>F[a
-autocmd Filetype md,markdown,rmd nnoremap ,a [](<++>)<++><Esc>F[a
-autocmd Filetype md,markdown,rmd nnoremap ,1 #<Space><Enter><++><Esc>kA
-autocmd Filetype md,markdown,rmd nnoremap ,2 ##<Space><Enter><++><Esc>kA
-autocmd Filetype md,markdown,rmd nnoremap ,3 ###<Space><Enter><++><Esc>kA
-autocmd Filetype md,markdown,rmd nnoremap ,4 ####<Space><Enter><++><Esc>kA
-autocmd Filetype md,markdown,rmd nnoremap ,5 #####<Space><Enter><++><Esc>kA
-autocmd Filetype md,markdown,rmd nnoremap ,6 ######<Space><Enter><++><Esc>kA
+
+autocmd Filetype md,markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+autocmd Filetype md,markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+autocmd Filetype md,markdown,rmd inoremap ,b ****<++><Esc>F*hi
+autocmd Filetype md,markdown,rmd inoremap ,e **<++><Esc>F*i
+autocmd Filetype md,markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,4 ####<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,5 #####<Space><Enter><++><Esc>kA
+autocmd Filetype md,markdown,rmd inoremap ,6 ######<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd setlocal foldexpr=MarkdownLevel
 autocmd Filetype markdown,rmd setlocal foldmethod=expr
 ""
@@ -117,20 +118,13 @@ hi CursorLine term=bold cterm=bold guibg=Grey20
 hi Folded ctermbg=240
 
 "comenting code
-au BufWinEnter *.c noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
-au BufWinEnter *.h noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
-au BufWinEnter *.c noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
-au BufWinEnter *.h noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
+au BufWinEnter *.h,*.c noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
+au BufWinEnter *.h,*.c noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
 
 "Python settings
-au BufWinEnter *.py noremap <leader>p :s/^/# /<CR> :nohlsearch <CR>
-au BufWinEnter *.pyw noremap <leader>p :s/^/# /<CR> :nohlsearch <CR>
-au BufWinEnter *.py noremap <leader>P :s/^# //<CR> :nohlsearch <CR>
-au BufWinEnter *.pyw noremap <leader>P :s/^# //<CR> :nohlsearch <CR>
-au BufWinEnter *.py set colorcolumn=81
-au BufWinEnter *.pyw set colorcolumn=81
-au BufWinEnter *.py nnoremap <leader>w :%s/[ ]\+$//<CR>:up<CR>
-au BufWinEnter *.pyw nnoremap <leader>w :%s/[ ]\+$//<CR>:up<CR>
+au BufWinEnter *.pyw,*.py noremap <leader>p :s/^/# /<CR> :nohlsearch <CR>
+au BufWinEnter *.pyw,*.py noremap <leader>P :s/^# //<CR> :nohlsearch <CR>
+au BufWinEnter *.pyw,*.py set colorcolumn=81
 
 " Html
 set matchpairs+=<:>
@@ -140,6 +134,7 @@ silent execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>q :b#<bar>bd#<CR>
 inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch <CR>"_c4l
+nnoremap <Space><Space> ?<++><CR>:nohlsearch <CR>"_c4l
 nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
 nnoremap <leader>f :diffoff<CR>:diffthis<CR>
@@ -152,3 +147,8 @@ nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
 nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
 nnoremap <leader>r :so ~/.vimrc<CR>
+nnoremap <F3> :make!<cr>
+
+"Project Settings(in project folder)
+set exrc
+set secure
