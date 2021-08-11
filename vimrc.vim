@@ -44,7 +44,7 @@ map! <F3> <C-R>=strftime('%c')<CR>
 cnoremap <C-l> <Right>
 cnoremap <C-h> <Left>
 nnoremap <leader>w :s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
-inoremap <leader>w <Esc>:s/[ ]\+$//e<CR>:nohlsearch<CR>up<CR>
+inoremap <leader>w <Esc>:s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
 
 "non printable characters
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -56,8 +56,8 @@ nmap <leader>l :set list!<CR>
 nnoremap <leader>s :set spell!<CR>
 
 "tab settings
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 "fold settings
@@ -131,6 +131,8 @@ set matchpairs+=<:>
 
 "Custom settings
 silent execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e " . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
+vnoremap u :s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
+"vnoremap u :<c-u>s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>q :b#<bar>bd#<CR>
 inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch <CR>"_c4l
@@ -139,7 +141,7 @@ nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
 nnoremap <leader>f :diffoff<CR>:diffthis<CR>
 nnoremap <leader>F :diffoff<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>n <C-w>v:e .<CR>
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
