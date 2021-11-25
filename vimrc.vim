@@ -6,47 +6,65 @@ set fileencoding=utf-8
 set nu
 set relativenumber
 
-"search options
+" Search options
 set hlsearch
 set incsearch
 nnoremap <leader>h :nohlsearch<CR>
 
-" Basic settings
-syntax on
-set ruler "show the cursor position at all time
-set noerrorbells
-set mouse=""
-set wildmenu
-set smartindent
+" Files
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
-set cursorline
-set autoread "reload file if changed outside of vim
+
+" Searching
+set wildmenu
 set path+=**
 
-"Basic remap
+" Viev
+syntax on
+set ruler "show the cursor position at all time
+set cursorline
+
+"Color settings
+colo darkblue
+set cursorline "Highlight current line
+hi CursorLine term=bold cterm=bold guibg=Grey20
+hi Folded ctermbg=240
+
+" Mouse and bells
+set mouse=""
+set noerrorbells
+
+" Indent
+set smartindent
+set autoread "reload file if changed outside of vim
+
+" Basic remap
 inoremap jj <Esc>
+nnoremap c "cc
+nnoremap C "cC
+nnoremap <leader>w :s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
+inoremap <leader>w <Esc>:s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
+
+" Navigation
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-n> gT
 nnoremap <C-p> gt
-nnoremap c "cc
-nnoremap C "cC
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-map! <F3> <C-R>=strftime('%c')<CR>
 cnoremap <C-l> <Right>
 cnoremap <C-h> <Left>
-nnoremap <leader>w :s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
-inoremap <leader>w <Esc>:s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
 
-"non printable characters
+" ?
+map! <F3> <C-R>=strftime('%c')<CR>
+
+" Non printable characters
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 highlight NonText guifg=#1a1a19
 highlight SpecialKey guifg=#4a4a59
@@ -55,67 +73,40 @@ set list
 nmap <leader>l :set list!<CR>
 nnoremap <leader>s :set spell!<CR>
 
-"tab settings
+" Tab settings
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-"fold settings
+" Fold settings
 set foldmethod=manual
 autocmd Filetype c setlocal foldmethod=syntax
 autocmd Filetype h setlocal foldmethod=syntax
+
+" Save buffers
 augroup remember_folds
     autocmd!
     autocmd BufWinLeave * mkview
     autocmd BufWinEnter * silent! loadview
 augroup END
 
-"" markdown
-function MarkdownLevel()
-    if getline(v:lnum) =~ '^# .*$'
-        return ">1"
-    endif
-    if getline(v:lnum) =~ '^## .*$'
-        return ">2"
-    endif
-    if getline(v:lnum) =~ '^### .*$'
-        return ">3"
-    endif
-    if getline(v:lnum) =~ '^#### .*$'
-        return ">4"
-    endif
-    if getline(v:lnum) =~ '^##### .*$'
-        return ">5"
-    endif
-    if getline(v:lnum) =~ '^###### .*$'
-        return ">6"
-    endif
-    return "="
-endfunction
-
+" Markdown
 autocmd Filetype md,markdown,rmd nnoremap ,n ---<Enter><Enter>
 autocmd Filetype md,markdown,rmd nnoremap ,s ~~~~<++><Esc>F~hi
 autocmd Filetype md,markdown,rmd nnoremap ,h ====<Space><++><Esc>F=hi
 
 autocmd Filetype md,markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
 autocmd Filetype md,markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+
 autocmd Filetype md,markdown,rmd inoremap ,b ****<++><Esc>F*hi
 autocmd Filetype md,markdown,rmd inoremap ,e **<++><Esc>F*i
+
 autocmd Filetype md,markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,5 #####<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,6 ######<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd setlocal foldexpr=MarkdownLevel
-autocmd Filetype markdown,rmd setlocal foldmethod=expr
-""
-
-"Color settings
-colo darkblue
-set cursorline "Highlight current line
-hi CursorLine term=bold cterm=bold guibg=Grey20
-hi Folded ctermbg=240
 
 "comenting code
 au BufWinEnter *.h,*.c noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
@@ -154,3 +145,6 @@ nnoremap <F3> :make!<cr>
 "Project Settings(in project folder)
 set exrc
 set secure
+
+"openssl
+map <leader>o :!"C:\Program Files\Git\usr\bin\openssl.exe"
