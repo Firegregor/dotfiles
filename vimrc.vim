@@ -1,8 +1,8 @@
-"Encoding
+" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
 
-"Numbers
+" Numbers
 set nu
 set relativenumber
 
@@ -21,14 +21,14 @@ set undofile
 set wildmenu
 set path+=**
 
-" Viev
+" View
 syntax on
 set ruler "show the cursor position at all time
 set cursorline
 
-"Color settings
+" Colors
 colo darkblue
-set cursorline "Highlight current line
+" set cursorline "Highlight current line
 hi CursorLine term=bold cterm=bold guibg=Grey20
 hi Folded ctermbg=240
 
@@ -44,8 +44,16 @@ set autoread "reload file if changed outside of vim
 inoremap jj <Esc>
 nnoremap c "cc
 nnoremap C "cC
-nnoremap <leader>w :s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
-inoremap <leader>w <Esc>:s/[ ]\+$//e<CR>:nohlsearch<CR>:up<CR>
+nnoremap <leader>w :up<CR>
+inoremap <leader>w <ESC>:up<CR>
+nnoremap <leader>r :so ~/.vimrc<CR>
+
+" <++> trick
+nnoremap <Space><Space> /<++><CR>:nohlsearch<CR>"_c4l
+nnoremap <leader><Space> a<++><Esc>
+nnoremap <leader>t o<++><Esc>
+inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch<CR>"_c4l
+inoremap <leader><Space> <++>
 
 " Navigation
 nnoremap <C-j> <C-w>j
@@ -61,8 +69,11 @@ noremap <Right> <Nop>
 cnoremap <C-l> <Right>
 cnoremap <C-h> <Left>
 
-" ?
-map! <F3> <C-R>=strftime('%c')<CR>
+" Resizing
+nnoremap <silent> <leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <leader>> :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
+nnoremap <silent> <leader>< :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
 
 " Non printable characters
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -77,18 +88,26 @@ nnoremap <leader>s :set spell!<CR>
 set tabstop=4
 set shiftwidth=4
 set expandtab
+nnoremap <leader>t :set expandtab!
 
 " Fold settings
 set foldmethod=manual
-autocmd Filetype c setlocal foldmethod=syntax
-autocmd Filetype h setlocal foldmethod=syntax
+set foldexpr=getline(v:lnum)=~'^\\s*$'&&getline(v:lnum+1)=~'\\S'?'<1':1
 
 " Save buffers
+set viewdir=~/.config/vim/view
 augroup remember_folds
     autocmd!
     autocmd BufWinLeave * mkview
     autocmd BufWinEnter * silent! loadview
 augroup END
+
+" vim
+nnoremap <leader>v :tabe ~/.vimrc<CR>w"vy$v'V
+autocmd BufWinEnter *.vim set foldmethod=expr
+autocmd BufWinLeave *.vim set foldmethod=manual
+autocmd BufWinEnter *.vim nnoremap <leader>p :s/^/" /<CR>:nohlsearch<CR>
+autocmd BufWinEnter *.vim nnoremap <leader>P :s/^" //<CR>:nohlsearch<CR>
 
 " Markdown
 autocmd Filetype md,markdown,rmd nnoremap ,n ---<Enter><Enter>
@@ -108,27 +127,26 @@ autocmd Filetype md,markdown,rmd inoremap ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,5 #####<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,6 ######<Space><Enter><++><Esc>kA
 
-"comenting code
-au BufWinEnter *.h,*.c noremap <leader>p :s/^/\/\/ /<CR> :nohlsearch <CR>
-au BufWinEnter *.h,*.c noremap <leader>P :s/^\/\/ //<CR> :nohlsearch <CR>
+" C files
+autocmd BufWinEnter *.c,*.h set foldmethod=syntax
+autocmd BufWinLeave *.c,*.h set foldmethod=manual
+autocmd BufWinEnter *.c,*.h nnoremap <leader>p :s/^/\/\/ /<CR>:nohlsearch<CR>
+autocmd BufWinEnter *.c,*.h nnoremap <leader>P :s/^\/\/ //<CR>:nohlsearch<CR>
 
-"Python settings
-au BufWinEnter *.pyw,*.py noremap <leader>p :s/^/# /<CR> :nohlsearch <CR>
-au BufWinEnter *.pyw,*.py noremap <leader>P :s/^# //<CR> :nohlsearch <CR>
-au BufWinEnter *.pyw,*.py set colorcolumn=81
+" Python settings
+autocmd BufWinEnter *.py,*.pyw set foldmethod=syntax
+autocmd BufWinLeave *.py,*.pyw set foldmethod=manual
+autocmd BufWinEnter *.py,*.pyw nnoremap <leader>p :s/^/# /<CR>:nohlsearch<CR>
+autocmd BufWinEnter *.py,*.pyw nnoremap <leader>P :s/^# //<CR>:nohlsearch<CR>
 
 " Html
 set matchpairs+=<:>
 
 "Custom settings
-silent execute "noremap <leader>v :tabe " . var_doc . "<CR><C-w>v'V<C-w><C-r><C-w><C-w><C-w>s:e " . var_doc2 . "<CR><C-w><C-r><C-w><C-w>"
-vnoremap u :s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
+"vnoremap u :s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
 "vnoremap u :<c-u>s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>q :b#<bar>bd#<CR>
-inoremap <Space><Space> <Esc>/<++><CR>:nohlsearch <CR>"_c4l
-nnoremap <Space><Space> ?<++><CR>:nohlsearch <CR>"_c4l
-nnoremap <leader>t o<++><Esc>
 nnoremap <leader>b :<C-r>p<CR>
 nnoremap <leader>f :diffoff<CR>:diffthis<CR>
 nnoremap <leader>F :diffoff<CR>
@@ -139,12 +157,3 @@ nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
 nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
-nnoremap <leader>r :so ~/.vimrc<CR>
-nnoremap <F3> :make!<cr>
-
-"Project Settings(in project folder)
-set exrc
-set secure
-
-"openssl
-map <leader>o :!"C:\Program Files\Git\usr\bin\openssl.exe"
