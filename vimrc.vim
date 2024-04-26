@@ -27,7 +27,7 @@ set ruler "show the cursor position at all time
 set cursorline
 
 " Colors
-colo darkblue
+colo desert
 " set cursorline "Highlight current line
 hi CursorLine term=bold cterm=bold guibg=Grey20
 hi Folded ctermbg=240
