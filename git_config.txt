@@ -1,0 +1,12 @@
+[user]
+	name = Grzegorz Kot
+	email = gkot35@gmail.com
+[alias]
+	st = "status -s"
+	sta = "status"
+	cm = "commit -m"
+	ap = "add -p"
+	unstage = "rm --cached"
+	po = "push origin"
+	pr = "pull --rebase"
+	adog = "log --all --decorate --oneline --graph"
