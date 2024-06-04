@@ -1,10 +1,14 @@
 [user]
 	name = Grzegorz Kot
 	email = gkot35@gmail.com
+	signkey = <++>
+[commit]
+	gpgsign = True
 [alias]
 	st = "status -s"
 	sta = "status"
-	cm = "commit -m"
+	commit = "commit -S"
+	cm = "commit -S -m"
 	ap = "add -p"
 	unstage = "rm --cached"
 	po = "push origin"
