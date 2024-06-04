@@ -103,7 +103,7 @@ augroup remember_folds
 augroup END
 
 " vim
-nnoremap <leader>v :tabe ~/.vimrc<CR>w"vy$v'V
+nnoremap <leader>v :tabe ~/.vimrc<CR>v'V
 autocmd BufWinEnter *.vim set foldmethod=expr
 autocmd BufWinLeave *.vim set foldmethod=manual
 autocmd BufWinEnter *.vim nnoremap <leader>p :s/^/" /<CR>:nohlsearch<CR>
@@ -141,6 +141,10 @@ autocmd BufWinEnter *.py,*.pyw nnoremap <leader>P :s/^# //<CR>:nohlsearch<CR>
 
 " Html
 set matchpairs+=<:>
+
+" Notes
+nnoremap <leader>o :! bash -c ~/.config/dotfiles/takenote.sh<CR>
+inoremap <leader>q <ESC>:q!<CR>
 
 "Custom settings
 "vnoremap u :s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
