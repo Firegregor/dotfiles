@@ -113,13 +113,10 @@ autocmd BufWinEnter *.vim nnoremap <leader>P :s/^" //<CR>:nohlsearch<CR>
 autocmd Filetype md,markdown,rmd nnoremap ,n ---<Enter><Enter>
 autocmd Filetype md,markdown,rmd nnoremap ,s ~~~~<++><Esc>F~hi
 autocmd Filetype md,markdown,rmd nnoremap ,h ====<Space><++><Esc>F=hi
-
 autocmd Filetype md,markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
 autocmd Filetype md,markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-
 autocmd Filetype md,markdown,rmd inoremap ,b ****<++><Esc>F*hi
 autocmd Filetype md,markdown,rmd inoremap ,e **<++><Esc>F*i
-
 autocmd Filetype md,markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
@@ -143,14 +140,15 @@ autocmd BufWinEnter *.py,*.pyw nnoremap <leader>P :s/^# //<CR>:nohlsearch<CR>
 set matchpairs+=<:>
 
 " Notes
-nnoremap <leader>o :! bash -c ~/.config/dotfiles/takenote.sh<CR>
+nnoremap <leader>O :! bash -i -c ~/.config/dotfiles/takenote.sh<CR>
+nnoremap <leader>o :! wt -w 0 nt -p Notes<CR>
 inoremap <leader>q <ESC>:q!<CR>
 
 "Custom settings
 "vnoremap u :s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
 "vnoremap u :<c-u>s/\%V[0-9a-fA-F]\{2\}/\=nr2char(printf("%d", "0x".submatch(0)))/g"<cr><c-l>
 nnoremap <leader>Q :bd!<CR>
-nnoremap <leader>q :b#<bar>bd#<CR>
+nnoremap <leader>q :bd<CR>
 nnoremap <leader>b :<C-r>p<CR>
 nnoremap <leader>f :diffoff<CR>:diffthis<CR>
 nnoremap <leader>F :diffoff<CR>
@@ -161,3 +159,17 @@ nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
 nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
+
+"Local notes
+"nnoremap <leader>o :tabe ~/.config/Notes/log/note-$(date +\%Y-\%m).md<CR>Go<Esc>:r!echo "\#\# $(date +\%d.\%m-\%H:\%M)"<CR>o
+
+function! Open_win_path()
+    "opens file from windows like path
+    let @+ = "/" . join(split(@+, ":"),"")
+    let @+ = join(split(@+, "\\"), "/")
+    let @+ = join(split(@+, "\""), "")
+    ":echo fin_path
+    :execute "e " . @+
+endfunction
+
+nnoremap <leader>v :call Open_win_path()<CR>

@@ -14,9 +14,5 @@ pathadd(){
         PATH+=:$1
     fi
 }
-pathadd ~/.vim/dotfiles/.bin
 
-# EVAA specific
-pathadd /home/pi/evaa/tools/evaa_cli/src/evaa_cli
-# in case adding to path does not work
-# alias evaa="sudo python3 /evaa/tools/evaa_cli/src/evaa_cli/evaa.py"
+alias note=<++>
