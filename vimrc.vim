@@ -110,13 +110,13 @@ autocmd BufWinEnter *.vim nnoremap <leader>p :s/^/" /<CR>:nohlsearch<CR>
 autocmd BufWinEnter *.vim nnoremap <leader>P :s/^" //<CR>:nohlsearch<CR>
 
 " Markdown
-autocmd Filetype md,markdown,rmd nnoremap ,n ---<Enter><Enter>
-autocmd Filetype md,markdown,rmd nnoremap ,s ~~~~<++><Esc>F~hi
-autocmd Filetype md,markdown,rmd nnoremap ,h ====<Space><++><Esc>F=hi
-autocmd Filetype md,markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-autocmd Filetype md,markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-autocmd Filetype md,markdown,rmd inoremap ,b ****<++><Esc>F*hi
-autocmd Filetype md,markdown,rmd inoremap ,e **<++><Esc>F*i
+autocmd Filetype md,markdown,rmd nnoremap <leader>n ---<Enter><Enter>
+autocmd Filetype md,markdown,rmd nnoremap <leader>s ~~~~<++><Esc>F~hi
+autocmd Filetype md,markdown,rmd nnoremap <leader>h ====<Space><++><Esc>F=hi
+autocmd Filetype md,markdown,rmd inoremap <leader>i ![](<++>)<++><Esc>F[a
+autocmd Filetype md,markdown,rmd inoremap <leader>a [](<++>)<++><Esc>F[a
+autocmd Filetype md,markdown,rmd inoremap <leader>b ****<++><Esc>F*hi
+autocmd Filetype md,markdown,rmd inoremap <leader>e **<++><Esc>F*i
 autocmd Filetype md,markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype md,markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
@@ -172,4 +172,5 @@ function! Open_win_path()
     :execute "e " . @+
 endfunction
 
-nnoremap <leader>v :call Open_win_path()<CR>
+nnoremap <leader>o :call Open_win_path()<CR>
+noremap <leader>c :set list! nu! relativenumber!<CR>
