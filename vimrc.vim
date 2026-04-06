@@ -174,3 +174,5 @@ endfunction
 
 nnoremap <leader>o :call Open_win_path()<CR>
 noremap <leader>c :set list! nu! relativenumber!<CR>
+nnoremap <leader>v :call Open_win_path()<CR>
+runtime ftplugin/man.vim
