@@ -25,6 +25,7 @@ set path+=**
 syntax on
 set ruler "show the cursor position at all time
 set cursorline
+runtime ftplugin/man.vim "Manpager support
 
 " Colors
 colo desert
@@ -163,6 +164,9 @@ nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
 "Local notes
 "nnoremap <leader>o :tabe ~/.config/Notes/log/note-$(date +\%Y-\%m).md<CR>Go<Esc>:r!echo "\#\# $(date +\%d.\%m-\%H:\%M)"<CR>o
 
+" transparent bg
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+
 function! Open_win_path()
     "opens file from windows like path
     let @+ = "/" . join(split(@+, ":"),"")
@@ -174,5 +178,3 @@ endfunction
 
 nnoremap <leader>o :call Open_win_path()<CR>
 noremap <leader>c :set list! nu! relativenumber!<CR>
-nnoremap <leader>v :call Open_win_path()<CR>
-runtime ftplugin/man.vim
