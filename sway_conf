@@ -4,11 +4,9 @@ set $lock ~/.local/bin/lockscreen.sh
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
 set $term foot
-set $term foot
-
 set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
 set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
-set $screenshot grim ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenshot grim ~/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 set $screenclip slurp | grim -g - ~/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 set $cl_high #009ddc
@@ -47,14 +45,26 @@ set $wsF10 20:20
 set $wsF11 21:
 set $wsF12 22:
 
-#Autart
-exec BraveBrowser
+# Font
+font pango:Sans 12
+
+# Window borders
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders smart
+
+smart_gaps on
+gaps inner 5
+
+#Autostart
+exec BraveWebBrowser
+
 
 # Default workspaces for common programs
 assign [class="^Chromium$"] $ws1
-# assign [class="^code-oss$"] $ws2
+assign [class="^code-oss$"] $ws2
 assign [class="^Signal$"] $wsF1
-assign [class="^Riot$"] $wsF1
+# assign [class="^Riot$"] $wsF1
 assign [class="^Mailspring$"] $wsF2
 assign [app_id="virt-manager"] $wsF3
 assign [class="^KeePass2$"] $wsF11
@@ -85,7 +95,7 @@ input * xkb_options "caps:escape"
 # Shortcuts
 bindsym $mod+Return exec $term
 bindsym $mod+Print exec $screenshot
-bindsym $mod+Shift+Print exec $screenclip
+bindsym $mod+q exec $screenclip
 bindsym $mod+d exec $menu
 
 bindsym $mod+Shift+q kill
@@ -97,6 +107,11 @@ bindsym $mod+v splitv
 bindsym $mod+l exec $lock
 bindsym $mod+Escape exec $power
 bindsym $mod+End exec $wifi
+bindsym $mod+Tab exec rofi -show window
+
+# Brightness controls
+bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
